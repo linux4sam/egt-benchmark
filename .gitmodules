@@ -1,0 +1,3 @@
+[submodule "external/hayai"]
+	path = external/hayai
+	url = https://github.com/nickbruun/hayai.git
