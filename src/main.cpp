@@ -313,6 +313,58 @@ BENCHMARK(Startup, Complex, 10, 10)
     app.event().draw();
 }
 
+class InputFixture : public ::hayai::Fixture
+{
+public:
+
+    virtual void SetUp()
+    {
+        auto sizer = std::make_shared<BoxSizer>(orientation::flex, justification::middle);
+        window.add(expand(sizer));
+
+        for (auto x = 0; x < 42; x++)
+            sizer->add(std::make_shared<Button>("Input Test"));
+        window.show();
+        app.event().draw();
+
+        x = 0;
+        y = 0;
+    }
+
+    virtual void TearDown()
+    {
+        window.remove_all();
+    }
+
+    Application app;
+    TopWindow window;
+
+    struct TestInput : public Input
+    {
+        using Input::Input;
+
+        inline void dis(Event& event)
+        {
+            Input::dispatch(event);
+        }
+    } input;
+
+    int x{window.size().width() / 2};
+    int y{window.size().height() / 2};
+};
+
+BENCHMARK_F(InputFixture, MouseMove, 10, 10000)
+{
+    Event down(eventid::raw_pointer_down, Pointer(DisplayPoint(x, y)));
+    input.dis(down);
+
+    Event move(eventid::raw_pointer_move, Pointer(DisplayPoint(x, y)));
+    input.dis(move);
+
+    Event up(eventid::raw_pointer_up, Pointer(DisplayPoint(x, y)));
+    input.dis(up);
+}
+
 int main(int argc, char** argv)
 {
     hayai::MainRunner runner;
