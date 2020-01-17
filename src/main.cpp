@@ -48,8 +48,8 @@ struct WidgetMover
         m_widget->move(m_widget->point() + m_speed);
         if (!m_bounding.contains(m_widget->box()))
         {
-            m_speed.set_x(m_speed.x() * -1);
-            m_speed.set_y(m_speed.y() * -1);
+            m_speed.x(m_speed.x() * -1);
+            m_speed.y(m_speed.y() * -1);
             return true;
         }
         return false;
@@ -57,7 +57,7 @@ struct WidgetMover
 
     void change()
     {
-        m_widget->set_text(std::to_string(m_c++));
+        m_widget->text(std::to_string(m_c++));
     }
 
     T* m_widget{nullptr};
@@ -131,8 +131,8 @@ public:
     virtual void SetUp()
     {
         center(sizer);
-        text.set_width(200);
-        checkbox.set_width(200);
+        text.width(200);
+        checkbox.width(200);
         window.show();
     }
 
@@ -149,15 +149,15 @@ public:
 
 BENCHMARK_F(WidgetFixture, UpdateTextBox, 10, 1000)
 {
-    text.set_text("Test String");
+    text.text("Test String");
     app.event().draw();
-    text.set_text("Longer test string");
+    text.text("Longer test string");
     app.event().draw();
 }
 
 BENCHMARK_F(WidgetFixture, UpdateCheckBox, 10, 1000)
 {
-    checkbox.set_checked(!checkbox.checked());
+    checkbox.checked(!checkbox.checked());
     app.event().draw();
 }
 
@@ -167,7 +167,7 @@ public:
 
     virtual void SetUp()
     {
-        window.set_boxtype(Theme::boxtype::none);
+        window.boxtype().clear();
         window.show();
     }
 
@@ -193,7 +193,7 @@ BENCHMARK_F(DrawShapeFixture, DrawLines, 10, 1000)
               Point(uniform_dist_width(e1), uniform_dist_height(e1)));
 
     auto width = 1;
-    painter.set_line_width(width);
+    painter.line_width(width);
     painter.set(color);
     painter.draw(line);
     painter.stroke();
@@ -214,7 +214,7 @@ BENCHMARK_F(DrawShapeFixture, DrawLinesAlpha, 10, 1000)
               Point(uniform_dist_width(e1), uniform_dist_height(e1)));
 
     auto width = 1;
-    painter.set_line_width(width);
+    painter.line_width(width);
     painter.set(color);
     painter.draw(line);
     painter.stroke();
@@ -305,7 +305,7 @@ BENCHMARK(Startup, Complex, 10, 10)
 {
     Application app;
     TopWindow window;
-    BoxSizer sizer(orientation::flex, justification::start);
+    BoxSizer sizer(Orientation::flex, Justification::start);
     window.add(expand(sizer));
     for (auto x = 0; x < 40; x++)
         sizer.add(std::make_shared<Button>("Press Me"));
@@ -319,7 +319,7 @@ public:
 
     virtual void SetUp()
     {
-        auto sizer = std::make_shared<BoxSizer>(orientation::flex, justification::middle);
+        auto sizer = std::make_shared<BoxSizer>(Orientation::flex, Justification::middle);
         window.add(expand(sizer));
 
         for (auto x = 0; x < 42; x++)
@@ -355,13 +355,13 @@ public:
 
 BENCHMARK_F(InputFixture, MouseMove, 10, 10000)
 {
-    Event down(eventid::raw_pointer_down, Pointer(DisplayPoint(x, y)));
+    Event down(EventId::raw_pointer_down, Pointer(DisplayPoint(x, y)));
     input.dis(down);
 
-    Event move(eventid::raw_pointer_move, Pointer(DisplayPoint(x, y)));
+    Event move(EventId::raw_pointer_move, Pointer(DisplayPoint(x, y)));
     input.dis(move);
 
-    Event up(eventid::raw_pointer_up, Pointer(DisplayPoint(x, y)));
+    Event up(EventId::raw_pointer_up, Pointer(DisplayPoint(x, y)));
     input.dis(up);
 }
 
