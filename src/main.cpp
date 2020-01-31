@@ -167,7 +167,7 @@ public:
 
     virtual void SetUp()
     {
-        window.boxtype().clear();
+        window.fill_flags().clear();
         window.show();
     }
 
