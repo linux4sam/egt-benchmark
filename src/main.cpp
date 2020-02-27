@@ -21,14 +21,14 @@ BENCHMARK(ColorFixture, RGBAInterpolation, 10, 100)
 
 BENCHMARK(ColorFixture, HSVInterpolation, 10, 100)
 {
-    ColorMap colors({Palette::red, Palette::green}, ColorMap::interpolation::hsv);
+    ColorMap colors({Palette::red, Palette::green}, ColorMap::Interpolation::hsv);
     for (auto x = 0; x < 100; x++)
         colors.interp(1.f / x);
 }
 
 BENCHMARK(ColorFixture, HSLInterpolation, 10, 100)
 {
-    ColorMap colors({Palette::red, Palette::green}, ColorMap::interpolation::hsl);
+    ColorMap colors({Palette::red, Palette::green}, ColorMap::Interpolation::hsl);
     for (auto x = 0; x < 100; x++)
         colors.interp(1.f / x);
 }
