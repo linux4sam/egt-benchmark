@@ -1,5 +1,5 @@
 AC_PREREQ([2.69])
-AC_INIT([egt-benchmark], [0.1])
+AC_INIT([egt-benchmark], [1.0-rc1])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_MACRO_DIR([m4])
@@ -30,7 +30,7 @@ AC_CHECK_HEADER_STDBOOL
 AC_C_INLINE
 AC_TYPE_UINT32_T
 
-PKG_CHECK_MODULES(LIBEGT, [libegt], [], [
+PKG_CHECK_MODULES(LIBEGT, [libegt >= 1.0-rc2], [], [
    AC_MSG_ERROR(libegt not found.  This is required.)
 ])
 
