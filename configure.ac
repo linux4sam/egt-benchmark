@@ -1,5 +1,5 @@
 AC_PREREQ([2.69])
-AC_INIT([egt-benchmark],[1.0])
+AC_INIT([egt-benchmark],[1.1-rc1])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_MACRO_DIR([m4])
@@ -28,7 +28,7 @@ AX_PTHREAD([LIBS="$PTHREAD_LIBS $LIBS"
             CXXFLAGS="$CXXFLAGS $PTHREAD_CFLAGS"],
             AC_MSG_ERROR(Can not find pthreads.  This is required.))
 
-PKG_CHECK_MODULES(LIBEGT, [libegt >= 1.0], [], [
+PKG_CHECK_MODULES(LIBEGT, [libegt >= 1.6-rc1], [], [
    AC_MSG_ERROR(libegt not found.  This is required.)
 ])
 
