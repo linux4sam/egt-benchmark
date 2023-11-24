@@ -313,6 +313,17 @@ BENCHMARK(Startup, Complex, 10, 10)
     app.event().draw();
 }
 
+BENCHMARK(Startup, Cairo, 10, 10)
+{
+	cairo_t* cr;
+	cairo_surface_t* surface;
+
+	surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 640, 480);
+	cairo_create(surface);
+	cairo_surface_destroy(surface);
+	cairo_destroy(cr);
+}
+
 class InputFixture : public ::hayai::Fixture
 {
 public:
