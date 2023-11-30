@@ -8,6 +8,12 @@
 #include <hayai_main.hpp>
 #include <vector>
 
+#include <libinput.h>
+#include <libudev.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <unistd.h>
+
 using namespace std;
 using namespace egt;
 using namespace egt::experimental;
@@ -322,6 +328,36 @@ BENCHMARK(Startup, Cairo, 10, 10)
 	cairo_create(surface);
 	cairo_surface_destroy(surface);
 	cairo_destroy(cr);
+}
+
+int open_restricted(const char* path, int flags, void* user_data)
+{
+	int fd = open(path, flags);
+	return fd < 0 ? -errno : fd;
+}
+
+void close_restricted(int fd, void* user_data)
+{
+	close(fd);
+}
+
+struct libinput_interface interface =
+{
+	open_restricted,
+	close_restricted,
+};
+
+BENCHMARK(Startup, Libinput, 10, 10)
+{
+	struct libinput* li;
+	struct udev* udev = udev_new();
+
+	li = libinput_udev_create_context(&interface, NULL, udev);
+
+	libinput_udev_assign_seat(li, "seat0");
+
+        libinput_unref(li);
+        udev_unref(udev);
 }
 
 class InputFixture : public ::hayai::Fixture

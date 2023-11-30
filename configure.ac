@@ -32,5 +32,9 @@ PKG_CHECK_MODULES(LIBEGT, [libegt >= 1.6], [], [
    AC_MSG_ERROR(libegt not found.  This is required.)
 ])
 
+PKG_CHECK_MODULES(LIBINPUT, [libinput >= 1.6.3], [], [
+   AC_MSG_ERROR(libinput not found.  This is required.)
+])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
