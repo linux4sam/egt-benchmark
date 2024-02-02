@@ -18,21 +18,21 @@ using namespace std;
 using namespace egt;
 using namespace egt::experimental;
 
-BENCHMARK(ColorFixture, RGBAInterpolation, 10, 100)
+BENCHMARK(ColorFixture, RGBAInterpolation, 10, 1000)
 {
     ColorMap colors({Palette::red, Palette::green});
     for (auto x = 0; x < 100; x++)
         colors.interp(1.f / x);
 }
 
-BENCHMARK(ColorFixture, HSVInterpolation, 10, 100)
+BENCHMARK(ColorFixture, HSVInterpolation, 10, 1000)
 {
     ColorMap colors({Palette::red, Palette::green}, ColorMap::Interpolation::hsv);
     for (auto x = 0; x < 100; x++)
         colors.interp(1.f / x);
 }
 
-BENCHMARK(ColorFixture, HSLInterpolation, 10, 100)
+BENCHMARK(ColorFixture, HSLInterpolation, 10, 1000)
 {
     ColorMap colors({Palette::red, Palette::green}, ColorMap::Interpolation::hsl);
     for (auto x = 0; x < 100; x++)
@@ -114,7 +114,7 @@ public:
     vector<WidgetMover<Button>> movers;
 };
 
-BENCHMARK_F(DrawFixture, MoveAnimate, 10, 500)
+BENCHMARK_F(DrawFixture, MoveAnimate, 10, 50)
 {
     for (auto& mover : movers)
         mover.animate();
@@ -122,7 +122,7 @@ BENCHMARK_F(DrawFixture, MoveAnimate, 10, 500)
     app.event().draw();
 }
 
-BENCHMARK_F(DrawFixture, UpdateButton, 10, 500)
+BENCHMARK_F(DrawFixture, UpdateButton, 10, 50)
 {
     for (auto& mover : movers)
         mover.change();
@@ -153,7 +153,7 @@ public:
     CheckBox checkbox{sizer, "CheckBox"};
 };
 
-BENCHMARK_F(WidgetFixture, UpdateTextBox, 10, 1000)
+BENCHMARK_F(WidgetFixture, UpdateTextBox, 10, 100)
 {
     text.text("Test String");
     app.event().draw();
@@ -161,7 +161,7 @@ BENCHMARK_F(WidgetFixture, UpdateTextBox, 10, 1000)
     app.event().draw();
 }
 
-BENCHMARK_F(WidgetFixture, UpdateCheckBox, 10, 1000)
+BENCHMARK_F(WidgetFixture, UpdateCheckBox, 10, 100)
 {
     checkbox.checked(!checkbox.checked());
     app.event().draw();
@@ -233,7 +233,7 @@ BENCHMARK_F(DrawShapeFixture, DrawLinesAlpha, 10, 1000)
     app.event().draw();
 }
 
-BENCHMARK_F(DrawShapeFixture, DrawSquares, 10, 1000)
+BENCHMARK_F(DrawShapeFixture, DrawSquares, 10, 500)
 {
     Painter painter{window.screen()->context()};
     Color color(uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1));
@@ -249,7 +249,7 @@ BENCHMARK_F(DrawShapeFixture, DrawSquares, 10, 1000)
     app.event().draw();
 }
 
-BENCHMARK_F(DrawShapeFixture, DrawSquaresAlpha, 10, 1000)
+BENCHMARK_F(DrawShapeFixture, DrawSquaresAlpha, 10, 500)
 {
     Painter painter{window.screen()->context()};
     Color color(uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1));
@@ -400,7 +400,7 @@ public:
     int y{window.size().height() / 2};
 };
 
-BENCHMARK_F(InputFixture, MouseMove, 10, 10000)
+BENCHMARK_F(InputFixture, MouseMove, 20, 25000)
 {
     Event down(EventId::raw_pointer_down, Pointer(DisplayPoint(x, y)));
     input.dis(down);
