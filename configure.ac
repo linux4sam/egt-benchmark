@@ -28,7 +28,7 @@ AX_PTHREAD([LIBS="$PTHREAD_LIBS $LIBS"
             CXXFLAGS="$CXXFLAGS $PTHREAD_CFLAGS"],
             AC_MSG_ERROR(Can not find pthreads.  This is required.))
 
-PKG_CHECK_MODULES(LIBEGT, [libegt >= 1.6], [], [
+PKG_CHECK_MODULES(LIBEGT, [libegt >= 1.9], [], [
    AC_MSG_ERROR(libegt not found.  This is required.)
 ])
 

@@ -11,6 +11,9 @@ CUSTOM_LDADD = $(LIBEGT_LIBS) $(LIBINPUT_LIBS) -ludev
 bin_PROGRAMS = benchmark
 benchmark_SOURCES = src/main.cpp
 benchmark_CPPFLAGS = -I$(top_srcdir)/external/hayai/src -pthread
-benchmark_CXXFLAGS = $(CUSTOM_CXXFLAGS) $(AM_CXXFLAGS)
+benchmark_CXXFLAGS = $(CUSTOM_CXXFLAGS) $(AM_CXXFLAGS) -DBENCHMARKDATA=\"$(datadir)/egt/benchmark\"
 benchmark_LDADD = $(CUSTOM_LDADD)
 benchmark_LDFLAGS = $(AM_LDFLAGS)
+
+benchmarkdir = $(prefix)/share/egt/benchmark
+dist_benchmark_DATA = $(wildcard $(top_srcdir)/images/*.png)

@@ -297,6 +297,86 @@ BENCHMARK_F(DrawShapeFixture, DrawCirclesAlpha, 10, 1000)
     app.event().draw();
 }
 
+class DrawAppFixture : public ::hayai::Fixture
+{
+public:
+
+    virtual void SetUp()
+    {
+        egt::add_search_path(BENCHMARKDATA);
+
+        egt_logo.autoresize(false);
+        egt_logo.clear();
+        egt_logo.fill_flags(egt::Theme::FillFlag::blend);
+        egt_logo.box(egt::Rect(16, 16, 64, 64));
+        egt_logo.background(egt::Image("file:mgs_logo_icon.png"));
+        window.add(egt_logo);
+
+        cancel_ok.autoresize(false);
+        cancel_ok.show_label(false);
+        cancel_ok.fill_flags().clear();
+        cancel_ok.border_radius(0);
+        cancel_ok.padding(0);
+        cancel_ok.box(egt::Rect(16, 128, 64, 64));
+        cancel_ok.switch_image(egt::Image("file:cancel.png"), false);
+        cancel_ok.switch_image(egt::Image("file:ok.png"), true);
+        window.add(cancel_ok);
+
+        pause_play.autoresize(false);
+        pause_play.show_label(false);
+        pause_play.fill_flags().clear();
+        pause_play.border_radius(0);
+        pause_play.padding(0);
+        pause_play.box(egt::Rect(96, 128, 64, 64));
+        pause_play.switch_image(egt::Image("file:pause.png"), false);
+        pause_play.switch_image(egt::Image("file:play.png"), true);
+        window.add(pause_play);
+
+        up.autoresize(false);
+        up.clear();
+        up.border_radius(0);
+        up.box(egt::Rect(314, 385, 75, 75));
+        up.background(egt::Image("file:up.png"), egt::Palette::GroupId::normal);
+        up.background(egt::Image("file:up2.png"), egt::Palette::GroupId::active);
+        window.add(up);
+
+        down.autoresize(false);
+        down.clear();
+        down.border_radius(0);
+        down.box(egt::Rect(412, 385, 75, 75));
+        down.background(egt::Image("file:down.png"), egt::Palette::GroupId::normal);
+        down.background(egt::Image("file:down2.png"), egt::Palette::GroupId::active);
+        window.add(down);
+
+        window.background(egt::Image("file:background.png"));
+        window.show();
+    }
+
+    virtual void TearDown()
+    {
+    }
+
+    Application app;
+    TopWindow window;
+    egt::Label egt_logo;
+    egt::CheckBox cancel_ok;
+    egt::CheckBox pause_play;
+    egt::Button up;
+    egt::Button down;
+};
+
+BENCHMARK_F(DrawAppFixture, DrawApp, 10, 200)
+{
+    window.damage();
+    app.event().draw();
+}
+
+BENCHMARK_F(DrawAppFixture, DrawButton, 10, 200)
+{
+    pause_play.checked(!pause_play.checked());
+    app.event().draw();
+}
+
 BENCHMARK(Startup, Basic, 10, 10)
 {
     Application app;
