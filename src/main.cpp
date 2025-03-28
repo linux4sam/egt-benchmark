@@ -240,9 +240,7 @@ BENCHMARK_F(DrawShapeFixture, DrawSquares, 10, 500)
     Rect rect(Point(uniform_dist_width(e1), uniform_dist_height(e1)),
               Size(100,100));
 
-    painter.set(color);
-    painter.draw(rect);
-    painter.fill();
+    painter.draw(color, rect);
 
     window.damage(rect);
 
@@ -256,9 +254,7 @@ BENCHMARK_F(DrawShapeFixture, DrawSquaresAlpha, 10, 500)
     Rect rect(Point(uniform_dist_width(e1), uniform_dist_height(e1)),
               Size(100,100));
 
-    painter.set(color);
-    painter.draw(rect);
-    painter.fill();
+    painter.draw(color, rect);
 
     window.damage(rect);
 
