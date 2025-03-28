@@ -8,6 +8,7 @@
 #include <hayai_main.hpp>
 #include <vector>
 
+#include <cairo.h>
 #include <libinput.h>
 #include <libudev.h>
 #include <fcntl.h>
@@ -193,7 +194,7 @@ public:
 
 BENCHMARK_F(DrawShapeFixture, DrawLines, 10, 1000)
 {
-    Painter painter{window.screen()->context()};
+    auto& painter = window.screen()->painter();
     Color color(uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1));
     Line line(Point(uniform_dist_width(e1), uniform_dist_height(e1)),
               Point(uniform_dist_width(e1), uniform_dist_height(e1)));
@@ -214,7 +215,7 @@ BENCHMARK_F(DrawShapeFixture, DrawLines, 10, 1000)
 
 BENCHMARK_F(DrawShapeFixture, DrawLinesAlpha, 10, 1000)
 {
-    Painter painter{window.screen()->context()};
+    auto& painter = window.screen()->painter();
     Color color(uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1));
     Line line(Point(uniform_dist_width(e1), uniform_dist_height(e1)),
               Point(uniform_dist_width(e1), uniform_dist_height(e1)));
@@ -235,7 +236,7 @@ BENCHMARK_F(DrawShapeFixture, DrawLinesAlpha, 10, 1000)
 
 BENCHMARK_F(DrawShapeFixture, DrawSquares, 10, 500)
 {
-    Painter painter{window.screen()->context()};
+    auto& painter = window.screen()->painter();
     Color color(uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1));
     Rect rect(Point(uniform_dist_width(e1), uniform_dist_height(e1)),
               Size(100,100));
@@ -249,7 +250,7 @@ BENCHMARK_F(DrawShapeFixture, DrawSquares, 10, 500)
 
 BENCHMARK_F(DrawShapeFixture, DrawSquaresAlpha, 10, 500)
 {
-    Painter painter{window.screen()->context()};
+    auto& painter = window.screen()->painter();
     Color color(uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1));
     Rect rect(Point(uniform_dist_width(e1), uniform_dist_height(e1)),
               Size(100,100));
@@ -263,7 +264,7 @@ BENCHMARK_F(DrawShapeFixture, DrawSquaresAlpha, 10, 500)
 
 BENCHMARK_F(DrawShapeFixture, DrawCircles, 10, 1000)
 {
-    Painter painter{window.screen()->context()};
+    auto& painter = window.screen()->painter();
     Color color(uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1));
     Circle circle(Point(uniform_dist_width(e1), uniform_dist_height(e1)), 50);
 
@@ -279,7 +280,7 @@ BENCHMARK_F(DrawShapeFixture, DrawCircles, 10, 1000)
 
 BENCHMARK_F(DrawShapeFixture, DrawCirclesAlpha, 10, 1000)
 {
-    Painter painter{window.screen()->context()};
+    auto& painter = window.screen()->painter();
     Color color(uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1), uniform_dist_rgb(e1));
     Circle circle(Point(uniform_dist_width(e1), uniform_dist_height(e1)), 50);
 

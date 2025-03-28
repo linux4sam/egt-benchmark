@@ -4,9 +4,10 @@ CUSTOM_CXXFLAGS = $(WARN_CFLAGS) \
 	-I$(top_srcdir)/src \
 	-I$(top_srcdir)/external/hayai/src \
 	$(LIBEGT_CFLAGS) \
+	$(CAIRO_CFLAGS) \
 	$(LIBINPUT_CFLAGS)
 
-CUSTOM_LDADD = $(LIBEGT_LIBS) $(LIBINPUT_LIBS) -ludev
+CUSTOM_LDADD = $(LIBEGT_LIBS) $(CAIRO_LIBS) $(LIBINPUT_LIBS) -ludev
 
 bin_PROGRAMS = benchmark
 benchmark_SOURCES = src/main.cpp
