@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.23)
 
 project(
-    egt-thermostat
-    VERSION 1.8
+    egt-benchmark
+    VERSION 1.2
     DESCRIPTION "An application to benchmark the EGT library."
     LANGUAGES CXX
 )
