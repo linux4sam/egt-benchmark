@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.23)
 
 project(
     egt-benchmark
-    VERSION 1.3
+    VERSION 1.4
     DESCRIPTION "An application to benchmark the EGT library."
     LANGUAGES CXX
 )
-#set(PROJECT_VERSION_RC 1)
+set(PROJECT_VERSION_RC 1)
 if (DEFINED PROJECT_VERSION_RC)
     string(APPEND PROJECT_VERSION "-rc${PROJECT_VERSION_RC}")
 endif()
@@ -33,7 +33,7 @@ endif()
 
 find_package(PkgConfig REQUIRED)
 
-pkg_check_modules(LIBEGT REQUIRED libegt>=1.11)
+pkg_check_modules(LIBEGT REQUIRED libegt>=1.12)
 pkg_check_modules(LIBINPUT REQUIRED libinput>=1.6.3)
 pkg_check_modules(CAIRO REQUIRED cairo>=1.14.6)
 
