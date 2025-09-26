@@ -121,6 +121,7 @@ BENCHMARK_F(DrawFixture, MoveAnimate, 10, 50)
         mover.animate();
 
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK_F(DrawFixture, UpdateButton, 10, 50)
@@ -129,6 +130,7 @@ BENCHMARK_F(DrawFixture, UpdateButton, 10, 50)
         mover.change();
 
     app.event().draw();
+    app.event().flush();
 }
 
 class WidgetFixture : public ::hayai::Fixture
@@ -160,12 +162,14 @@ BENCHMARK_F(WidgetFixture, UpdateTextBox, 10, 100)
     app.event().draw();
     text.text("Longer test string");
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK_F(WidgetFixture, UpdateCheckBox, 10, 100)
 {
     checkbox.checked(!checkbox.checked());
     app.event().draw();
+    app.event().flush();
 }
 
 class DrawShapeFixture : public ::hayai::Fixture
@@ -211,6 +215,7 @@ BENCHMARK_F(DrawShapeFixture, DrawLines, 10, 1000)
     window.damage(rect);
 
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK_F(DrawShapeFixture, DrawLinesAlpha, 10, 1000)
@@ -232,6 +237,7 @@ BENCHMARK_F(DrawShapeFixture, DrawLinesAlpha, 10, 1000)
     window.damage(rect);
 
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK_F(DrawShapeFixture, DrawSquares, 10, 500)
@@ -246,6 +252,7 @@ BENCHMARK_F(DrawShapeFixture, DrawSquares, 10, 500)
     window.damage(rect);
 
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK_F(DrawShapeFixture, DrawSquaresAlpha, 10, 500)
@@ -260,6 +267,7 @@ BENCHMARK_F(DrawShapeFixture, DrawSquaresAlpha, 10, 500)
     window.damage(rect);
 
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK_F(DrawShapeFixture, DrawCircles, 10, 1000)
@@ -276,6 +284,7 @@ BENCHMARK_F(DrawShapeFixture, DrawCircles, 10, 1000)
     window.damage(rect);
 
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK_F(DrawShapeFixture, DrawCirclesAlpha, 10, 1000)
@@ -292,6 +301,7 @@ BENCHMARK_F(DrawShapeFixture, DrawCirclesAlpha, 10, 1000)
     window.damage(rect);
 
     app.event().draw();
+    app.event().flush();
 }
 
 class DrawAppFixture : public ::hayai::Fixture
@@ -366,12 +376,14 @@ BENCHMARK_F(DrawAppFixture, DrawApp, 10, 200)
 {
     window.damage();
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK_F(DrawAppFixture, DrawButton, 10, 200)
 {
     pause_play.checked(!pause_play.checked());
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK(Startup, Basic, 10, 10)
@@ -382,6 +394,7 @@ BENCHMARK(Startup, Basic, 10, 10)
     egt::center(button);
     window.show();
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK(Startup, Complex, 10, 10)
@@ -394,6 +407,7 @@ BENCHMARK(Startup, Complex, 10, 10)
         sizer.add(std::make_shared<Button>("Press Me"));
     window.show();
     app.event().draw();
+    app.event().flush();
 }
 
 BENCHMARK(Startup, Cairo, 10, 10)
