@@ -6,7 +6,7 @@ project(
     DESCRIPTION "An application to benchmark the EGT library."
     LANGUAGES CXX
 )
-set(PROJECT_VERSION_RC 1)
+#set(PROJECT_VERSION_RC 1)
 if (DEFINED PROJECT_VERSION_RC)
     string(APPEND PROJECT_VERSION "-rc${PROJECT_VERSION_RC}")
 endif()
